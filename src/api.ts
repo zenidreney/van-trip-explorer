@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCpzJWPy8NJMR2uosdqkYkjPjkZu1Tvndw",
     authDomain: "vanlife-7f797.firebaseapp.com",
@@ -20,18 +20,31 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const vansCollection = collection(db, "vans")
 
-export async function getApiObject() {
+
+type Van = {
+    id: string,
+    name: string,
+    price: number,
+    imageUrl: string,
+    type: string,
+    description: string,
+    hostId: string
+}
+
+export async function getApiObject(): Promise<Van[]> {
 
 
     const snapshot = await getDocs(vansCollection)
     const snapshotData = snapshot.docs.map(doc => {
         return {
-            ...doc.data(),
+            ...doc.data() as Omit<Van, "id">,
             id: doc.id
         }
     })
 
-    console.log(snapshotData)
+    //console.log(snapshotData)
+
+    return snapshotData
 
 }
 
@@ -41,9 +54,11 @@ export async function getVan(id: number) {
     const snapshot = await getDoc(docRef)
 
     const singleVan = {
-        ...snapshot.data(),
+        ...snapshot.data() as Omit<Van, "id">,
         id: snapshot.id
     }
 
-    console.log(singleVan)
+    //console.log(singleVan)
+
+    return singleVan
 }

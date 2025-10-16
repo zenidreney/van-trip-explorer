@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-import { getApiObject, getVan } from './api.ts'
+/* import { getApiObject, getVan } from './api.ts'
 
 
 getApiObject()
-getVan(1)
+getVan(1) */
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
