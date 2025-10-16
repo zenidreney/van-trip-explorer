@@ -1,3 +1,15 @@
 img.van-img {
     width: 25%;
 }
+
+div.vans-container {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.van-info-container {
+    border: 1px dashed green;
+    max-width: 25%;
+}

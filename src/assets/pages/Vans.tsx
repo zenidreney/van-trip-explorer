@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { getApiObject } from '../../api.ts'
+import { getAllVans } from '../../api.ts'
 
 import "./Vans.css"
 
@@ -19,7 +19,7 @@ export default function Vans() {
 
     useEffect(() => {
         async function getVans() {
-            const vanObj = await getApiObject()
+            const vanObj = await getAllVans()
 
             setVans(vanObj)
         }
@@ -35,7 +35,7 @@ export default function Vans() {
 
     const vanEls = vans.map(van => {
         return (
-            <div>
+            <div key={van.id} className='van-info-container'>
 
 
                 <img className="van-img" src={van.imageUrl} />
@@ -50,10 +50,9 @@ export default function Vans() {
 
 
     return (
-        <>
-            <h1>I am Vans</h1>
-            {vanEls}
+            <div className='vans-container'>
+                {vanEls}
+            </div>
 
-        </>
     )
 }

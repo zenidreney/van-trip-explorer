@@ -31,7 +31,7 @@ type Van = {
     hostId: string
 }
 
-export async function getApiObject(): Promise<Van[]> {
+export async function getAllVans(): Promise<Van[]> {
 
 
     const snapshot = await getDocs(vansCollection)
