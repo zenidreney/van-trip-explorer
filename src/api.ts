@@ -7,12 +7,12 @@ import { initializeApp } from "firebase/app";
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCpzJWPy8NJMR2uosdqkYkjPjkZu1Tvndw",
-    authDomain: "vanlife-7f797.firebaseapp.com",
-    projectId: "vanlife-7f797",
-    storageBucket: "vanlife-7f797.firebasestorage.app",
-    messagingSenderId: "266108481011",
-    appId: "1:266108481011:web:8dcefc2c97a44db814b686"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
