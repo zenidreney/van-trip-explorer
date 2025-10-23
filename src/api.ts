@@ -21,7 +21,7 @@ const db = getFirestore(app)
 const vansCollection = collection(db, "vans")
 
 
-type Van = {
+export type Van = {
     id: string,
     name: string,
     price: number,
@@ -42,7 +42,7 @@ export async function getAllVans(): Promise<Van[]> {
         }
     })
 
-    //console.log(snapshotData)
+  //  console.log(snapshotData)
 
     return snapshotData
 

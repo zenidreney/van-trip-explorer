@@ -8,7 +8,7 @@ export default function Header() {
             <nav>
                 <Link to="/about">About</Link>
                 <Link to="/">Home</Link>
-                 <Link to="/vans">Vans</Link>
+                <Link to="/vans">Vans</Link>
             </nav>
         </header>
     )

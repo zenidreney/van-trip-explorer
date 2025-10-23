@@ -1,36 +1,13 @@
-import { useState, useEffect } from 'react'
-
-import { getAllVans } from '../../api.ts'
+import { useVans } from "../hooks/useVans"
 
 import "./Vans.css"
 
-type Van = {
-    id: string,
-    name: string,
-    price: number,
-    imageUrl: string,
-    type: string,
-    description: string,
-    hostId: string
-}
+
+
 
 export default function Vans() {
-    const [vans, setVans] = useState<Van[]>([])
 
-    useEffect(() => {
-        async function getVans() {
-            const vanObj = await getAllVans()
-
-            setVans(vanObj)
-        }
-
-        getVans()
-
-    }, [])
-
-    useEffect(() => {
-        console.log(vans)
-    }, [vans])
+    const { vans } = useVans()
 
 
     const vanEls = vans.map(van => {
