@@ -4,9 +4,9 @@ import { useVans } from "../hooks/useVans"
 
 export default function Home() {
 
-    const  { vans }  = useVans()
+    const  { loading, error }  = useVans()
 
-    console.log(vans)
+    console.log("loading", loading, "err", error)
 
 
     return (
