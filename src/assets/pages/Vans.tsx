@@ -7,7 +7,16 @@ import "./Vans.css"
 
 export default function Vans() {
 
-    const { vans } = useVans()
+    const { vans, loading, error } = useVans()
+
+    if(loading) {
+        return <p>Loading</p>
+    }
+
+    if(error) {
+        return <p>Error</p>
+    }
+
 
 
     const vanEls = vans.map(van => {
