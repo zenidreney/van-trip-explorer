@@ -6,7 +6,7 @@ export default function Home() {
 
     const { vans, loading, error } = useVans()
 
-    console.log("loading", loading, "err", error)
+    //console.log("loading", loading, "err", error)
 
     if (loading) {
         return <p>Loading</p>

@@ -48,7 +48,7 @@ export async function getAllVans(): Promise<Van[]> {
 
 }
 
-export async function getVan(id: number) {
+export async function getVan(id: string) {
     const docRef = doc(db, "vans", id.toString())
 
     const snapshot = await getDoc(docRef)

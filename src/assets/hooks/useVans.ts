@@ -11,8 +11,8 @@ export function useVans() {
         async function getVans() {
             try {
                 //throw new Error("Test Error") /* To test the error state */
-                const vanData = await getAllVans()
-                setVans(vanData)
+                const vansData = await getAllVans()
+                setVans(vansData)
             } catch (error) {
                 setError(error instanceof Error ? error : new Error("Error"))
                 console.log(error)
@@ -25,14 +25,9 @@ export function useVans() {
 
     }, [])
 
-    /*     useEffect(() => {
-            getAllVans()
-                .then(data => setVans(data))
-        }, []) */
-
-    useEffect(() => {
+   /*  useEffect(() => {
         console.log(vans)
-    }, [vans])
+    }, [vans]) */
 
     return { vans, loading, error }
 }
