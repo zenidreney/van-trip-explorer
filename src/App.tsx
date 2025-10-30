@@ -8,6 +8,8 @@ import Vans from './assets/pages/Vans'
 import VanDetail from './assets/pages/VanDetail'
 import NotFound from './assets/pages/NotFound'
 
+
+
 function App() {
 
   return (
