@@ -10,7 +10,6 @@ export default function Map() {
     const mapStyle = {
         height: "400px",
         width: "100%",
-        margin: "1rem",
     }
 
     return <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={mapStyle}>

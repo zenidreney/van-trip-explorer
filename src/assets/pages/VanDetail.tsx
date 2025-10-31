@@ -2,6 +2,8 @@ import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
 import Map from "../components/Map"
 
+import "./VanDetail.css"
+
 export default function VanDetail() {
 
     const { vanId } = useParams()
@@ -13,16 +15,21 @@ export default function VanDetail() {
     if (error) { return <p>Error</p> }
     if (!van) { return <p>No such Van.</p> }
 
-    const { description, imageUrl } = van
+    const { description, imageUrl, price } = van
 
     return (
-        <div className="van-datail-container">
+        <div className="van-detail-container">
 
-            <Map />
 
-            <p>I am VanDetail</p>
-            <p>{description} </p>
-            <img src={imageUrl} />
+            <div className="van-description-container">
+                <div>
+                    <p>{description} </p>
+                    <p>{price}$ per day</p>
+                </div>
+                <img src={imageUrl} className="van-img" />
+            </div>
+
+            <div className="map-frame"><Map /></div>
 
         </div>
     )

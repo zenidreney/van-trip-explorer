@@ -4,7 +4,7 @@ export default function Header() {
     return (
         <header>
 
-            <h1>I am Header</h1>
+            <h1>Van-Trip Explorer</h1>
             <nav>
                 <Link to="/about">About</Link>
                 <Link to="/">Home</Link>
