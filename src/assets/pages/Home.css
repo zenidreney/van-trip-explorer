@@ -1,32 +1,5 @@
-div.home-container {
-    border: 1px solid red;
-}
-
-img.home-vans {
-    width: 30%;
-    border-radius: 50%;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: -50px;
-}
-
-img.home-vans:nth-child(1) { transform: rotate(0deg) translate(100px); }
-img.home-vans:nth-child(2) { transform: rotate(60deg) translate(100px); }
-img.home-vans:nth-child(3) { transform: rotate(120deg) translate(100px); }
-img.home-vans:nth-child(4) { transform: rotate(180deg) translate(100px); }
-img.home-vans:nth-child(5) { transform: rotate(240deg) translate(100px); }
-img.home-vans:nth-child(6) { transform: rotate(300deg) translate(100px); }
-
-div.home-vans-container {
-    position: relative;
-    width: 450px;
-    height: 450px;
-    animation: spin 50s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+div.carousel-container {
+    max-width: 720px;
+    border-radius: 33px;
+    overflow: hidden;
 }
