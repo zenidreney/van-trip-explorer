@@ -33,7 +33,7 @@ export function useVan(id: string | undefined) {
     }, [id])
 
     useEffect(() => {
-        console.log(van)
+        //console.log(van)
     }, [van])
 
 

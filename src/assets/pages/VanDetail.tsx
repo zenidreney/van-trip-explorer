@@ -1,10 +1,33 @@
 import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
 import Map from "../components/Map"
+import Button from 'react-bootstrap/Button';
+
+import { getCoordinates } from "../../utils/getCoordinates";
+
+import { useRef } from "react";
 
 import "./VanDetail.css"
 
 export default function VanDetail() {
+
+    const locationName = useRef(null)
+    const long = useRef(null)
+    const lat = useRef(null)
+
+
+    
+    async function handleStartButton() {
+        const { name, longitude, latitude } = await getCoordinates("barcelona")
+        //console.log(name, longitude, latitude)
+        locationName.current = name
+        long.current = longitude
+        lat.current = latitude
+
+        console.log(locationName, long, lat)
+    }
+
+
 
     const { vanId } = useParams()
     //console.log(typeof vanId, vanId)
@@ -25,6 +48,7 @@ export default function VanDetail() {
                 <div>
                     <p>{description} </p>
                     <p>{price}$ per day</p>
+                    <Button variant="primary" onClick={handleStartButton}>Starting Point</Button>
                 </div>
                 <img src={imageUrl} className="van-img" />
             </div>
