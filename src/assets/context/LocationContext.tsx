@@ -11,8 +11,8 @@ type LocationContextProps = {
 }
 
 type LocationContextType = {
-    location: LocationObject
-    setLocation: Dispatch<SetStateAction<LocationObject>>
+    startLocation: LocationObject
+    setStartLocation: Dispatch<SetStateAction<LocationObject>>
 
 }
 
@@ -22,7 +22,7 @@ const LocationContext = createContext<LocationContextType | undefined>(undefined
 
 function LocationContextProvider({ children }: LocationContextProps) {
 
-    const [location, setLocation] = useState<LocationObject>({
+    const [startLocation, setStartLocation] = useState<LocationObject>({
         loc: null,
         long: null,
         lat: null
@@ -30,7 +30,7 @@ function LocationContextProvider({ children }: LocationContextProps) {
     
 
     return (
-        <LocationContext.Provider value={{ location, setLocation }}>
+        <LocationContext.Provider value={{ startLocation, setStartLocation }}>
             {children}
         </LocationContext.Provider>
 

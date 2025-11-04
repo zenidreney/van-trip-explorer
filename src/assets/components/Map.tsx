@@ -4,17 +4,14 @@ import "leaflet/dist/leaflet.css";
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
+type MapProps = {
+    long: string | null
+    lat: string | null
+}
 
+export default function Map({long, lat}: MapProps) {
 
-
-
-
-
-
-export default function Map() {
-
-    
-
+    console.log(long, lat)
 
     const mapStyle = {
         height: "400px",
@@ -23,7 +20,7 @@ export default function Map() {
 
     return (
         <>
-     
+
             <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={mapStyle}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -35,7 +32,6 @@ export default function Map() {
                     </Popup>
                 </Marker>
             </MapContainer>
-
         </>
 
     )

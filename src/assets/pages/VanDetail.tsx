@@ -13,16 +13,12 @@ import "./VanDetail.css"
 
 export default function VanDetail() {
 
-   
-
-    const { location, setLocation } = useLocation()
-
-
+    const { startLocation, setStartLocation } = useLocation()
 
     async function handleStartButton() {
         const { name, longitude, latitude } = await getCoordinates("barcelona")
         //console.log(name, longitude, latitude)
-        setLocation({
+        setStartLocation({
             loc: name,
             long: longitude,
             lat: latitude
@@ -31,8 +27,16 @@ export default function VanDetail() {
     }
     
     useEffect(() => {
-        console.log("City:", location.loc, "longitude", location.long, "latitude", location.lat);
-    }, [location]);
+        const { loc, long, lat  } = startLocation
+
+        console.log("City:", loc, "longitude", long, "latitude", lat);
+    }, [startLocation]);
+
+    const { loc, long, lat  } = startLocation
+
+    console.log("2nd console", loc, long, lat)
+
+
 
 
     const { vanId } = useParams()
@@ -59,7 +63,7 @@ export default function VanDetail() {
                 <img src={imageUrl} className="van-img" />
             </div>
 
-            <div className="map-frame"><Map /></div>
+            <div className="map-frame"><Map long={long} lat={lat} /></div>
 
         </div>
     )
