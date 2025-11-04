@@ -5,28 +5,34 @@ import Button from 'react-bootstrap/Button';
 
 import { getCoordinates } from "../../utils/getCoordinates";
 
-import { useRef } from "react";
+import { useEffect } from "react";
+import { useLocation } from "../hooks/useLocation";
+
 
 import "./VanDetail.css"
 
 export default function VanDetail() {
 
-    const locationName = useRef(null)
-    const long = useRef(null)
-    const lat = useRef(null)
+   
+
+    const { location, setLocation } = useLocation()
 
 
-    
+
     async function handleStartButton() {
         const { name, longitude, latitude } = await getCoordinates("barcelona")
         //console.log(name, longitude, latitude)
-        locationName.current = name
-        long.current = longitude
-        lat.current = latitude
+        setLocation({
+            loc: name,
+            long: longitude,
+            lat: latitude
+        })
 
-        console.log(locationName, long, lat)
     }
-
+    
+    useEffect(() => {
+        console.log("City:", location.loc, "longitude", location.long, "latitude", location.lat);
+    }, [location]);
 
 
     const { vanId } = useParams()
