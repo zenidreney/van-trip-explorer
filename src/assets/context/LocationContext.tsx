@@ -1,7 +1,7 @@
 import { createContext, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 
 type LocationObject = {
-    loc: string | null
+    location: string | null
     long: string | null
     lat: string | null
 }
@@ -23,7 +23,7 @@ const LocationContext = createContext<LocationContextType | undefined>(undefined
 function LocationContextProvider({ children }: LocationContextProps) {
 
     const [startLocation, setStartLocation] = useState<LocationObject>({
-        loc: null,
+        location: null,
         long: null,
         lat: null
     })

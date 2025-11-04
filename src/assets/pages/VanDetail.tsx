@@ -16,25 +16,25 @@ export default function VanDetail() {
     const { startLocation, setStartLocation } = useLocation()
 
     async function handleStartButton() {
-        const { name, longitude, latitude } = await getCoordinates("barcelona")
+        const { name, latitude, longitude } = await getCoordinates("barcelona")
         //console.log(name, longitude, latitude)
         setStartLocation({
-            loc: name,
-            long: longitude,
-            lat: latitude
+            location: name,
+            lat: latitude,
+            long: longitude
         })
 
     }
-    
-    useEffect(() => {
-        const { loc, long, lat  } = startLocation
 
-        console.log("City:", loc, "longitude", long, "latitude", lat);
+    useEffect(() => {
+        const { location, lat, long } = startLocation
+
+        console.log("City:", location, "longitude", long, "latitude", lat);
     }, [startLocation]);
 
-    const { loc, long, lat  } = startLocation
+    const { location, lat, long } = startLocation
 
-    console.log("2nd console", loc, long, lat)
+    console.log("2nd console", location, lat, long)
 
 
 
@@ -59,11 +59,14 @@ export default function VanDetail() {
                     <p>{description} </p>
                     <p>{price}$ per day</p>
                     <Button variant="primary" onClick={handleStartButton}>Starting Point</Button>
+                    {
+                        location ? <p>{location}</p> : ""
+                    }
                 </div>
                 <img src={imageUrl} className="van-img" />
             </div>
 
-            <div className="map-frame"><Map long={long} lat={lat} /></div>
+            <div className="map-frame"><Map lat={lat} long={long} /></div>
 
         </div>
     )
