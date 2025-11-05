@@ -2,6 +2,10 @@ import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
 import Map from "../components/Map"
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
+import Image from 'react-bootstrap/Image';
+
 
 import { getCoordinates } from "../../utils/getCoordinates";
 
@@ -9,14 +13,17 @@ import { useEffect } from "react";
 import { useLocation } from "../hooks/useLocation";
 
 
-import "./VanDetail.css"
+//import "./VanDetail.css"
 
 export default function VanDetail() {
 
     const { startLocation, setStartLocation } = useLocation()
 
-    async function handleStartButton() {
-        const { name, latitude, longitude } = await getCoordinates("barcelona")
+    async function handleStartSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+
+
+        const { name, latitude, longitude } = await getCoordinates("la palma")
         //console.log(name, longitude, latitude)
         setStartLocation({
             location: name,
@@ -26,10 +33,12 @@ export default function VanDetail() {
 
     }
 
+
+
     useEffect(() => {
         const { location, lat, long } = startLocation
 
-        console.log("City:", location, "longitude", long, "latitude", lat);
+        console.log("City:", location, "latitude", lat, "longitude", long);
     }, [startLocation]);
 
     const { location, lat, long } = startLocation
@@ -51,24 +60,48 @@ export default function VanDetail() {
     const { description, imageUrl, price } = van
 
     return (
-        <div className="van-detail-container">
+        <Stack direction="vertical" className="van-detail-container">
 
 
-            <div className="van-description-container">
-                <div>
+            <Stack
+                direction="horizontal"
+                gap={5}
+                className="
+                        van-description-container 
+                        flex-column-reverse
+                        flex-md-row
+                        ">
+                <Stack>
                     <p>{description} </p>
                     <p>{price}$ per day</p>
-                    <Button variant="primary" onClick={handleStartButton}>Starting Point</Button>
+
+                    <Form onSubmit={handleStartSubmit}>
+                        <Form.Group className="mb-3" controlId="formStartLocation">
+                            <Form.Label>Starting Point</Form.Label>
+                            <Form.Control type="text" placeholder="Enter start location" />
+                            <Form.Text className="text-muted">
+                                I want to start my journey from...
+                            </Form.Text>
+                        </Form.Group>
+
+
+
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+
                     {
                         location ? <p>{location}</p> : ""
                     }
-                </div>
-                <img src={imageUrl} className="van-img" />
-            </div>
+                </Stack>
+                <Image src={imageUrl} rounded fluid className="van-img" />
 
-            <div className="map-frame"><Map lat={lat} long={long} /></div>
+            </Stack>
 
-        </div>
+            <Stack className="map-frame mt-3"><Map lat={lat} long={long} /></Stack>
+
+        </Stack>
     )
 }
 

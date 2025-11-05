@@ -3,4 +3,12 @@ div.body-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+
+}
+
+img.van-img {
+    width: 90%;
+    max-width: 340px;
 }
