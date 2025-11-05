@@ -9,21 +9,25 @@ import Image from 'react-bootstrap/Image';
 
 import { getCoordinates } from "../../utils/getCoordinates";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "../hooks/useLocation";
 
 
-//import "./VanDetail.css"
-
 export default function VanDetail() {
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const { startLocation, setStartLocation } = useLocation()
 
     async function handleStartSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
+        console.log(inputRef.current?.value)
 
-        const { name, latitude, longitude } = await getCoordinates("la palma")
+        const startPoint = inputRef.current && inputRef.current.value ? inputRef.current.value : "madrid"
+
+
+
+        const { name, latitude, longitude } = await getCoordinates(startPoint)
         //console.log(name, longitude, latitude)
         setStartLocation({
             location: name,
@@ -78,7 +82,11 @@ export default function VanDetail() {
                     <Form onSubmit={handleStartSubmit}>
                         <Form.Group className="mb-3" controlId="formStartLocation">
                             <Form.Label>Starting Point</Form.Label>
-                            <Form.Control type="text" placeholder="Enter start location" />
+                            <Form.Control
+                                ref={inputRef}
+                                type="text"
+                                placeholder="Enter start location"
+                                required />
                             <Form.Text className="text-muted">
                                 I want to start my journey from...
                             </Form.Text>
@@ -86,14 +94,16 @@ export default function VanDetail() {
 
 
 
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                        <Stack direction="horizontal" className="justify-content-between">
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                            {
+                                location ? <p>Start from: {location}</p> : ""
+                            }
+                        </Stack>
                     </Form>
 
-                    {
-                        location ? <p>{location}</p> : ""
-                    }
                 </Stack>
                 <Image src={imageUrl} rounded fluid className="van-img" />
 
