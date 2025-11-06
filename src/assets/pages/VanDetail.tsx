@@ -1,21 +1,17 @@
 import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
-import Map from "../components/Map"
+import { useLocation } from "../hooks/useLocation";
 
 import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 
-import { useLocation } from "../hooks/useLocation";
-
+import Map from "../components/Map"
 import StartingLocation from "../components/StartingLocation";
-
-
 
 
 export default function VanDetail() {
 
     const { startLocation } = useLocation()
-
     const { vanId } = useParams()
     //console.log(typeof vanId, vanId)
     const { van, loading, error } = useVan(vanId)
@@ -31,7 +27,6 @@ export default function VanDetail() {
     return (
         <Stack direction="vertical" className="van-detail-container">
 
-
             <Stack
                 direction="horizontal"
                 gap={5}
@@ -40,7 +35,7 @@ export default function VanDetail() {
                         flex-column-reverse
                         flex-md-row
                         ">
-                <Stack>
+                <Stack className="m-3 m-md-0">
                     <p>{description} </p>
                     <p>{price}$ per day</p>
 
@@ -52,7 +47,6 @@ export default function VanDetail() {
             </Stack>
 
             <Stack className="map-frame mt-3"><Map lat={lat} long={long} /></Stack>
-
         </Stack>
     )
 }

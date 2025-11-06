@@ -1,7 +1,9 @@
 import { getCoordinates } from "../../utils/getCoordinates";
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
+
 import { useEffect, useRef } from "react";
 import { useLocation } from "../hooks/useLocation";
 
@@ -14,13 +16,9 @@ export default function StartingLocation() {
 
     async function handleStartSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-
-        console.log(inputRef.current?.value)
+        //console.log(inputRef.current?.value)
 
         const startPoint = inputRef.current && inputRef.current.value ? inputRef.current.value : "madrid"
-
-
-
         const { name, latitude, longitude } = await getCoordinates(startPoint)
         //console.log(name, longitude, latitude)
         setStartLocation({
@@ -31,7 +29,7 @@ export default function StartingLocation() {
 
     }
 
-
+// JUST FOR DEVELEOPMENT CONSOLE
 
     useEffect(() => {
         const { location, lat, long } = startLocation
@@ -43,7 +41,7 @@ export default function StartingLocation() {
 
     console.log("2nd console", location, lat, long)
 
-
+// END OF CONSOLE
 
     return(
         <Form onSubmit={handleStartSubmit}>
@@ -58,9 +56,6 @@ export default function StartingLocation() {
                                 I want to start my journey from...
                             </Form.Text>
                         </Form.Group>
-
-
-
                         <Stack direction="horizontal" className="align-items-end justify-content-between">
                             <Button variant="primary" type="submit">
                                 Submit
