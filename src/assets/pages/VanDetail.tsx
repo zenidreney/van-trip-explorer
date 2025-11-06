@@ -94,12 +94,12 @@ export default function VanDetail() {
 
 
 
-                        <Stack direction="horizontal" className="justify-content-between">
+                        <Stack direction="horizontal" className="align-items-end justify-content-between">
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
                             {
-                                location ? <p>Start from: {location}</p> : ""
+                                location ? <p className="m-0">Start from: {location}</p> : ""
                             }
                         </Stack>
                     </Form>
