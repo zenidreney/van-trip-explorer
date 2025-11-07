@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 
+
 type MapProps = {
     long: string | null
     lat: string | null
@@ -26,7 +27,7 @@ function MapCenter({ lat, long }: MapProps) {
 
 export default function Map({ long, lat }: MapProps) {
 
-    console.log(lat, long)
+    //console.log(lat, long)
 
     const mapStyle = {
         height: "400px",

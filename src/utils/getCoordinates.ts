@@ -4,7 +4,7 @@ export async function getCoordinates(location: string) {
     })
 
     const data = await res.json()
-    console.log(typeof data[0].name, typeof data[0].lat, typeof data[0].lon)
+    //console.log(typeof data[0].name, typeof data[0].lat, typeof data[0].lon)
 
     return {
         name: data[0].name,

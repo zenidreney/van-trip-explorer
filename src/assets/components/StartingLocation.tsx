@@ -33,12 +33,12 @@ export default function StartingLocation() {
     useEffect(() => {
         const { location, lat, long } = startLocation
 
-        console.log("City:", location, "latitude", lat, "longitude", long);
+        console.log("Start City:", location, "latitude", lat, "longitude", long);
     }, [startLocation]);
 
     const { location, lat, long } = startLocation
 
-    console.log("2nd console", location, lat, long)
+    console.log("Start 2nd console", location, lat, long)
 
 // END OF CONSOLE
 
@@ -52,7 +52,7 @@ export default function StartingLocation() {
                                 ref={startRef}
                                 type="text"
                                 placeholder="Enter start location"
-                                required />
+                                 />
                             <Form.Text className="text-muted">
                                 I want to start my journey from...
                             </Form.Text>

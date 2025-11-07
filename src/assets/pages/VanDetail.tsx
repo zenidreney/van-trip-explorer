@@ -12,7 +12,12 @@ import EndLocation from "../components/EndLocation";
 
 export default function VanDetail() {
 
-    const { startLocation } = useLocation()
+    const { startLocation, endLocation } = useLocation()
+
+    const { lat: endLat, long: endLong, location: endLoc} = endLocation
+    console.log(endLat, endLong, endLoc)
+
+
     const { vanId } = useParams()
     //console.log(typeof vanId, vanId)
     const { van, loading, error } = useVan(vanId)
