@@ -1,6 +1,5 @@
 import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
-import { useLocation } from "../hooks/useLocation";
 
 import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
@@ -11,13 +10,6 @@ import EndLocation from "../components/EndLocation";
 
 
 export default function VanDetail() {
-
-    const { endLocation } = useLocation()
-
-    const { lat: endLat, long: endLong, location: endLoc} = endLocation
-    console.log(endLat, endLong, endLoc)
-
-
     const { vanId } = useParams()
     //console.log(typeof vanId, vanId)
     const { van, loading, error } = useVan(vanId)
@@ -41,11 +33,13 @@ export default function VanDetail() {
                         flex-md-row
                         ">
                 <Stack className="m-3 m-md-0">
+
                     <p>{description} </p>
                     <p>{price}$ per day</p>
 
                     <StartingLocation />
                     <EndLocation />
+                    
                 </Stack>
                 <Image src={imageUrl} rounded fluid className="van-img" />
 

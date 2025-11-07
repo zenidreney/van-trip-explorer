@@ -28,10 +28,11 @@ function MapCenter({ lat, long }: MapProps) {
 
 export default function Map() {
 
-    const { startLocation } = useLocation()
-    const { lat: startLat, long: startLong } = startLocation
+    const { startLocation, endLocation } = useLocation()
+    const { location: startLoc, lat: startLat, long: startLong } = startLocation
+    const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
-    console.log(startLat, startLong)
+    console.log(startLoc, startLat, startLong, endLoc, endLat, endLong)
 
     const mapStyle = {
         height: "400px",
