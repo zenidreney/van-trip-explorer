@@ -4,6 +4,7 @@ import { useEffect } from "react";
 //import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { useLocation } from "../hooks/useLocation";
 
 
 type MapProps = {
@@ -25,9 +26,12 @@ function MapCenter({ lat, long }: MapProps) {
     return null
 }
 
-export default function Map({ long, lat }: MapProps) {
+export default function Map() {
 
-    //console.log(lat, long)
+    const { startLocation } = useLocation()
+    const { lat: startLat, long: startLong } = startLocation
+
+    console.log(startLat, startLong)
 
     const mapStyle = {
         height: "400px",
@@ -43,7 +47,7 @@ export default function Map({ long, lat }: MapProps) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                <MapCenter long={long} lat={lat} />
+                <MapCenter lat={startLat} long={startLong} />
                 <Marker position={[51.505, -0.09]}>
                     <Popup>
                         Choose a Location <br /> Start the journey!

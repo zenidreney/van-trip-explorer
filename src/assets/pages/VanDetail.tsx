@@ -12,7 +12,7 @@ import EndLocation from "../components/EndLocation";
 
 export default function VanDetail() {
 
-    const { startLocation, endLocation } = useLocation()
+    const { endLocation } = useLocation()
 
     const { lat: endLat, long: endLong, location: endLoc} = endLocation
     console.log(endLat, endLong, endLoc)
@@ -28,7 +28,6 @@ export default function VanDetail() {
     if (!van) { return <p>No such Van.</p> }
 
     const { description, imageUrl, price } = van
-    const { lat, long } = startLocation
 
     return (
         <Stack direction="vertical" className="van-detail-container">
@@ -52,7 +51,7 @@ export default function VanDetail() {
 
             </Stack>
 
-            <Stack className="map-frame mt-3"><Map lat={lat} long={long} /></Stack>
+            <Stack className="map-frame mt-3"><Map /></Stack>
         </Stack>
     )
 }
