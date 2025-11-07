@@ -47,25 +47,31 @@ function EndLocation() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formStartLocation">
-                <Form.Label>End Point</Form.Label>
-                <Form.Control
-                    ref={endRef}
-                    type="text"
-                    placeholder="Enter end location"
-                     />
-                <Form.Text className="text-muted">
-                    I want to end my journey at...
-                </Form.Text>
-            </Form.Group>
-            <Stack direction="horizontal" className="align-items-end justify-content-between">
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-                {
-                    location ? <p className="m-0">End at: {location}</p> : ""
-                }
+            <Stack direction="horizontal" gap={3} className="justify-content-between align-items-center">
+                <Form.Group className="mb-3" controlId="formStartLocation" style= {
+                           { width: "100%" }
+                        }>
+                    <Form.Label>End Point</Form.Label>
+                    <Form.Control
+                        ref={endRef}
+                        type="text"
+                        placeholder="Enter end location"
+                        
+                        required
+                         />
+                    <Form.Text className="text-muted">
+                        I want to end my journey at...
+                    </Form.Text>
+                </Form.Group>
+                <Stack direction="horizontal">
+                    <Button variant="primary" type="submit" className="m-3">
+                        Submit
+                    </Button>
+                </Stack>
             </Stack>
+                    {
+                        location ? <p className="m-0">End at: {location}</p> : ""
+                    }
         </Form>
     )
 }

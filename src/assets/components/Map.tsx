@@ -35,7 +35,7 @@ export default function Map() {
     const { lat: startLat, long: startLong } = startLocation
     const { lat: endLat, long: endLong } = endLocation
     
-    console.log(startLat, startLong, endLat, endLong)
+    //console.log(startLat, startLong, endLat, endLong)
     
     useEffect(() => {
     

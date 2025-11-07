@@ -28,7 +28,7 @@ export default function StartingLocationForm() {
 
     }
 
-// JUST FOR DEVELOPMENT CONSOLE
+    // JUST FOR DEVELOPMENT CONSOLE
 
     useEffect(() => {
         const { location, lat, long } = startLocation
@@ -40,32 +40,37 @@ export default function StartingLocationForm() {
 
     console.log("Start 2nd console", location, lat, long)
 
-// END OF CONSOLE
+    // END OF CONSOLE
 
 
 
-    return(
+    return (
         <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formStartLocation">
-                            <Form.Label>Starting Point</Form.Label>
-                            <Form.Control
-                                ref={startRef}
-                                type="text"
-                                placeholder="Enter start location"
-                                 />
-                            <Form.Text className="text-muted">
-                                I want to start my journey from...
-                            </Form.Text>
-                        </Form.Group>
-                        <Stack direction="horizontal" className="align-items-end justify-content-between">
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                            {
-                                location ? <p className="m-0">Start from: {location}</p> : ""
-                            }
-                        </Stack>
-                    </Form>
+            <Stack direction="horizontal" gap={3} className="justify-content-between align-items-center">
+                <Form.Group className="mb-3" controlId="formStartLocation" style={
+                    { width: "100%" }
+                }>
+                    <Form.Label>Starting Point</Form.Label>
+                    <Form.Control
+                        ref={startRef}
+                        type="text"
+                        placeholder="Enter start location"
+                        required
+                    />
+                    <Form.Text className="text-muted">
+                        I want to start my journey from...
+                    </Form.Text>
+                </Form.Group>
+                <Stack direction="horizontal">
+                    <Button variant="primary" type="submit" className="m-3">
+                        Submit
+                    </Button>
+                </Stack>
+            </Stack>
+            {
+                location ? <p className="m-0">Start from: {location}</p> : ""
+            }
+        </Form>
     )
 }
 
