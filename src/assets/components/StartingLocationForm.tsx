@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { useLocation } from "../hooks/useLocation";
 
 
-export default function StartingLocation() {
+export default function StartingLocationForm() {
 
     const startRef = useRef<HTMLInputElement>(null)
     const { startLocation, setStartLocation } = useLocation()

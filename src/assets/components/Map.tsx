@@ -36,8 +36,9 @@ export default function Map() {
     const { lat: endLat, long: endLong } = endLocation
     
     console.log(startLat, startLong, endLat, endLong)
+    
     useEffect(() => {
-        
+    
         if(!startLat || !endLat) {
 
             return
@@ -48,8 +49,8 @@ export default function Map() {
             const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`)
             const data = await res.json()
            // console.log("Route Data:", data.routes[0].legs[0].distance)
-            const distance = data.routes[0].legs[0].distance
-            setDistance(distance)
+            const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000)
+            setDistance(distanceInKm)
 
             if(data.routes?.length) {
                 const coords = data.routes[0].geometry.coordinates.map(
@@ -92,7 +93,7 @@ export default function Map() {
                         Choose a Location <br /> Start the journey!
                     </Popup>
                 </Marker>
-                {route.length > 0 && <Polyline positions={route} color="blue" />}
+                {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
         </>
 

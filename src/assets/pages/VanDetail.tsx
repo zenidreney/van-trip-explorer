@@ -1,12 +1,13 @@
 import { useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
+import { useLocation } from "../hooks/useLocation";
 
 import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 
 import Map from "../components/Map"
-import StartingLocation from "../components/StartingLocation";
-import EndLocation from "../components/EndLocation";
+import StartLocationForm from "../components/StartingLocationForm";
+import EndLocationForm  from "../components/EndLocationForm";
 
 
 export default function VanDetail() {
@@ -14,6 +15,7 @@ export default function VanDetail() {
     //console.log(typeof vanId, vanId)
     const { van, loading, error } = useVan(vanId)
     // console.log("loading: ", loading, "error: ", error)
+    const { distance } = useLocation()
 
     if (loading) { return <p>Loading</p> }
     if (error) { return <p>Error</p> }
@@ -37,15 +39,21 @@ export default function VanDetail() {
                     <p>{description} </p>
                     <p>{price}$ per day</p>
 
-                    <StartingLocation />
-                    <EndLocation />
-                    
+                    <StartLocationForm />
+
+                    <EndLocationForm />
+
+                {distance && <p>Total distance: {distance} kms</p>}
                 </Stack>
                 <Image src={imageUrl} rounded fluid className="van-img" />
 
             </Stack>
 
-            <Stack className="map-frame mt-3"><Map /></Stack>
+            <Stack className="map-frame mt-3">
+
+                <Map />
+
+            </Stack>
         </Stack>
     )
 }
