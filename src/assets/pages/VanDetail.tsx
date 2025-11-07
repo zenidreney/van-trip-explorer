@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 
 import Map from "../components/Map"
 import StartingLocation from "../components/StartingLocation";
+import EndLocation from "../components/EndLocation";
 
 
 export default function VanDetail() {
@@ -40,7 +41,7 @@ export default function VanDetail() {
                     <p>{price}$ per day</p>
 
                     <StartingLocation />
-
+                    <EndLocation />
                 </Stack>
                 <Image src={imageUrl} rounded fluid className="van-img" />
 

@@ -10,15 +10,14 @@ import { useLocation } from "../hooks/useLocation";
 
 export default function StartingLocation() {
 
-    const inputRef = useRef<HTMLInputElement>(null)
-
+    const startRef = useRef<HTMLInputElement>(null)
     const { startLocation, setStartLocation } = useLocation()
 
-    async function handleStartSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         //console.log(inputRef.current?.value)
 
-        const startPoint = inputRef.current && inputRef.current.value ? inputRef.current.value : "madrid"
+        const startPoint = startRef.current && startRef.current.value ? startRef.current.value : "madrid"
         const { name, latitude, longitude } = await getCoordinates(startPoint)
         //console.log(name, longitude, latitude)
         setStartLocation({
@@ -29,7 +28,7 @@ export default function StartingLocation() {
 
     }
 
-// JUST FOR DEVELEOPMENT CONSOLE
+// JUST FOR DEVELOPMENT CONSOLE
 
     useEffect(() => {
         const { location, lat, long } = startLocation
@@ -43,12 +42,14 @@ export default function StartingLocation() {
 
 // END OF CONSOLE
 
+
+
     return(
-        <Form onSubmit={handleStartSubmit}>
+        <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formStartLocation">
                             <Form.Label>Starting Point</Form.Label>
                             <Form.Control
-                                ref={inputRef}
+                                ref={startRef}
                                 type="text"
                                 placeholder="Enter start location"
                                 required />
