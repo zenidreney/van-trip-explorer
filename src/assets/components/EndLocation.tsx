@@ -20,7 +20,7 @@ function EndLocation() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        const endPoint = endRef.current && endRef.current.value ? endRef.current.value : "cadiz"
+        const endPoint = endRef.current && endRef.current.value ? endRef.current.value : "malaga"
         const { name, latitude, longitude } = await getCoordinates(endPoint)
         setEndLocation({
             location: name,

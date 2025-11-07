@@ -3,16 +3,16 @@ import { useEffect } from "react";
 //import "leaflet-routing-machine";
 //import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet'
 import { useLocation } from "../hooks/useLocation";
 
 
-type MapProps = {
+type MapCenterProps = {
     long: string | null
     lat: string | null
 }
 
-function MapCenter({ lat, long }: MapProps) {
+function MapCenter({ lat, long }: MapCenterProps) {
 
     const map = useMap()
 
@@ -26,18 +26,56 @@ function MapCenter({ lat, long }: MapProps) {
     return null
 }
 
+
 export default function Map() {
+    
+    const { startLocation, endLocation, setRoute, setDistance, route, distance } = useLocation()
+    //const [route, setRoute] = useState<[number, number][]>([])
 
-    const { startLocation, endLocation } = useLocation()
-    const { location: startLoc, lat: startLat, long: startLong } = startLocation
-    const { location: endLoc, lat: endLat, long: endLong } = endLocation
+    const { lat: startLat, long: startLong } = startLocation
+    const { lat: endLat, long: endLong } = endLocation
+    
+    console.log(startLat, startLong, endLat, endLong)
+    useEffect(() => {
+        
+        if(!startLat || !endLat) {
 
-    console.log(startLoc, startLat, startLong, endLoc, endLat, endLong)
+            return
 
+        }
+
+        async function fetchRoute() {
+            const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`)
+            const data = await res.json()
+           // console.log("Route Data:", data.routes[0].legs[0].distance)
+            const distance = data.routes[0].legs[0].distance
+            setDistance(distance)
+
+            if(data.routes?.length) {
+                const coords = data.routes[0].geometry.coordinates.map(
+                    ([lng, lat]: [number, number]) => [lat, lng]
+                )
+                setRoute(coords)
+            }
+        }
+
+        fetchRoute()
+    
+    
+    }, [startLat, startLong, setRoute, setDistance, endLat, endLong])
+    
     const mapStyle = {
         height: "400px",
         width: "100%",
     }
+
+    // JUST FOR DEV CONSOLE
+
+    useEffect(() => {
+        console.log("Distance", distance)
+    }, [distance])
+
+    // END OF CONSOLE
 
     return (
         <>
@@ -54,6 +92,7 @@ export default function Map() {
                         Choose a Location <br /> Start the journey!
                     </Popup>
                 </Marker>
+                {route.length > 0 && <Polyline positions={route} color="blue" />}
             </MapContainer>
         </>
 

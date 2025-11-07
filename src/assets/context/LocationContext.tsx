@@ -13,6 +13,10 @@ type LocationContextType = {
     setStartLocation: Dispatch<SetStateAction<LocationObject>>
     endLocation: LocationObject
     setEndLocation: Dispatch<SetStateAction<LocationObject>>
+    route: [number, number][]
+    setRoute: Dispatch<SetStateAction<[number, number][]>>
+    distance: number
+    setDistance: Dispatch<SetStateAction<number>>
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined)
@@ -30,12 +34,20 @@ function LocationContextProvider({ children }: LocationContextProps) {
         lat: null
     })
 
+    const [route, setRoute] = useState<[number, number][]>([])
+
+    const [distance, setDistance] = useState<number>(0)
+
     return (
         <LocationContext.Provider value={{
             startLocation,
             setStartLocation,
             endLocation,
-            setEndLocation
+            setEndLocation,
+            route,
+            setRoute,
+            distance,
+            setDistance
         }}>
             {children}
         </LocationContext.Provider>
