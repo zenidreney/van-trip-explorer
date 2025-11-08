@@ -4,7 +4,7 @@ import { Outlet } from "react-router"
 
 
 import { Stack } from "react-bootstrap"
-import "../../App.css"
+//import "../App.css"
 
 export default function Layout() {
     return (

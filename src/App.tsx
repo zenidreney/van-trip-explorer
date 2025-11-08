@@ -1,14 +1,14 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, } from 'react-router'
 
-import Home from './assets/pages/Home'
-import About from './assets/pages/About'
-import Layout from './assets/components/Layout'
-import Vans from './assets/pages/Vans'
-import VanDetail from './assets/pages/VanDetail'
-import NotFound from './assets/pages/NotFound'
+import Home from './pages/Home'
+import About from './pages/About'
+import Layout from './components/Layout'
+import Vans from './pages/Vans'
+import VanDetail from './pages/VanDetail'
+import NotFound from './pages/NotFound'
 
-import { LocationContextProvider } from './assets/context/LocationContext'
+import { LocationContextProvider } from './context/LocationContext'
 
 
 function App() {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getAllVans } from "../../api";
-import type { Van } from "../../api";
+import { getAllVans } from "../api";
+import type { Van } from "../api";
 
 export function useVans() {
     const [loading, setLoading] = useState(true)

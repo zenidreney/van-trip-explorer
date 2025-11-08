@@ -1,5 +1,5 @@
-import { getVan } from "../../api";
-import type { Van } from "../../api"
+import { getVan } from "../api";
+import type { Van } from "../api"
 import { useState, useEffect } from "react";
 
 export function useVan(id: string | undefined) {

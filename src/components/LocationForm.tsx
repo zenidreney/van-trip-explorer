@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 
-import { getCoordinates } from '../../utils/getCoordinates';
+import { getCoordinates } from '../utils/getCoordinates';
 import { useLocation } from '../hooks/useLocation';
 
 type locationFormProps = {
