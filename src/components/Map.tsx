@@ -7,12 +7,12 @@ import { MapContainer, TileLayer, useMap, Polyline } from 'react-leaflet'
 import { useLocation } from "../hooks/useLocation";
 
 
-type MapCenterProps = {
+type CenterMapProps = {
     long: string | null
     lat: string | null
 }
 
-function MapCenter({ lat, long }: MapCenterProps) {
+function CenterMap({ lat, long }: CenterMapProps) {
 
     const map = useMap()
 
@@ -22,6 +22,19 @@ function MapCenter({ lat, long }: MapCenterProps) {
             map.setView(center, map.getZoom())
         }
     }, [lat, long, map])
+
+    return null
+}
+
+function FitMap( { route }: { route: [number, number][]} ) {
+    const map = useMap()
+
+    useEffect(() => {
+        if(route.length > 1) {
+            
+            map.fitBounds(route)
+        }
+    }, [route, map])
 
     return null
 }
@@ -86,8 +99,9 @@ export default function Map() {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <FitMap route = {route} />
 
-                <MapCenter lat={startLat} long={startLong} />
+                <CenterMap lat={startLat} long={startLong} />
                
                 {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
