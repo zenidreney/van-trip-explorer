@@ -13,7 +13,7 @@ type locationFormProps = {
 }
 
 
-function LocationForm( { type, children}: locationFormProps) {
+function LocationForm({ type, children }: locationFormProps) {
     console.log(children)
 
     const locationRef = useRef<HTMLInputElement>(null)
@@ -68,8 +68,8 @@ function LocationForm( { type, children}: locationFormProps) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Stack direction="horizontal" gap={3} className="justify-content-between align-items-center">
-                <Form.Group className="mb-3" controlId="formStartLocation" style={
+            <Stack direction="horizontal" gap={3} className='align-items-end'>
+                <Form.Group controlId="formStartLocation" style={
                     { width: "100%" }
                 }>
                     <Form.Label className="text-muted">
@@ -78,29 +78,21 @@ function LocationForm( { type, children}: locationFormProps) {
                     <Form.Control
                         ref={locationRef}
                         type="text"
-                        placeholder="Enter a city or a town (e.g. New York)"
+                        placeholder="Enter a city or a town..."
                         required
                     />
                 </Form.Group>
-                <Stack direction="horizontal">
-                    <Button variant="primary" type="submit" className="m-3">
-                        Submit
-                    </Button>
-                </Stack>
+
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+
             </Stack>
-            {
-                
-                type === "start" && startLoc ? 
-
-                    <p>Start at: {startLoc}</p> :
-
-                type === "end" && endLoc ?
-
-                    <p>End at: {endLoc}</p> :
-
-                    null
-            }
             
+            {type === "start" && startLoc && <p>Start at: {startLoc}</p>}
+
+            {type === "end" && endLoc && <p>End at: {endLoc}</p>}
+
         </Form>
     )
 }
