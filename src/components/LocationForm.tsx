@@ -78,7 +78,7 @@ function LocationForm( { type, children}: locationFormProps) {
                     <Form.Control
                         ref={locationRef}
                         type="text"
-                        placeholder="Enter start location"
+                        placeholder="Enter a city or a town (e.g. New York)"
                         required
                     />
                 </Form.Group>
@@ -89,12 +89,18 @@ function LocationForm( { type, children}: locationFormProps) {
                 </Stack>
             </Stack>
             {
-                location && <div className="m-0">
-                    
-                    {type === "start" ?  <p>Start at:{startLoc}</p> : <p>End at: {endLoc}</p>}
-                    
-                    </div>
+                
+                type === "start" && startLoc ? 
+
+                    <p>Start at: {startLoc}</p> :
+
+                type === "end" && endLoc ?
+
+                    <p>End at: {endLoc}</p> :
+
+                    null
             }
+            
         </Form>
     )
 }
