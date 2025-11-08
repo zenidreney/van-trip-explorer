@@ -3,7 +3,7 @@ import { useEffect } from "react";
 //import "leaflet-routing-machine";
 //import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Polyline } from 'react-leaflet'
 import { useLocation } from "../hooks/useLocation";
 
 
@@ -88,11 +88,7 @@ export default function Map() {
                 />
 
                 <MapCenter lat={startLat} long={startLong} />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        Choose a Location <br /> Start the journey!
-                    </Popup>
-                </Marker>
+               
                 {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
         </>
