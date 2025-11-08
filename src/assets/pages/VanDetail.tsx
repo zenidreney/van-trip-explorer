@@ -6,8 +6,8 @@ import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 
 import Map from "../components/Map"
-import StartLocationForm from "../components/StartingLocationForm";
-import EndLocationForm  from "../components/EndLocationForm";
+
+import LocationForm from "../components/LocationForm";
 
 
 export default function VanDetail() {
@@ -39,9 +39,9 @@ export default function VanDetail() {
                     <p>{description} </p>
                     <p>{price}$ per day</p>
 
-                    <StartLocationForm />
+                    <LocationForm type="start">I want to start my journey from...</LocationForm>
+                    <LocationForm type="end">I want to end my journey at...</LocationForm>
 
-                    <EndLocationForm />
 
                 {distance && <p>Total distance: {distance} kms</p>}
                 </Stack>
