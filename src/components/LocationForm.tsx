@@ -51,16 +51,18 @@ function LocationForm( { type, children}: locationFormProps) {
     // JUST FOR DEVELOPMENT CONSOLE
 
     useEffect(() => {
-        const { location: startLoc, lat: startLat, long: startLong } = startLocation
-        const { location: endLoc, lat: endLat, long: endLong } = endLocation
+        const { location: startLocConsole, lat: startLatConsole, long: startLongConsole } = startLocation
+        const { location: endLocConsole, lat: endLatConsole, long: endLongConsole } = endLocation
 
-        console.log("Start City:", startLoc, "latitude", startLat, "longitude", startLong);
-        console.log("End City:", endLoc, "latitude", endLat, "longitude", endLong)
+        console.log("Start City:", startLocConsole, "latitude", startLatConsole, "longitude", startLongConsole);
+        console.log("End City:", endLocConsole, "latitude", endLatConsole, "longitude", endLongConsole)
     }, [startLocation, endLocation]);
 
-    const { location, lat, long } = startLocation
+    const { location: startLoc, lat: startLat, long: startLong } = startLocation
+    const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
-    console.log("Start 2nd console", location, lat, long)
+    console.log("Start 2nd console", startLoc, startLat, startLong)
+    console.log("End 2nd console", endLoc, endLat, endLong)
 
     // END OF CONSOLE
 
@@ -70,16 +72,15 @@ function LocationForm( { type, children}: locationFormProps) {
                 <Form.Group className="mb-3" controlId="formStartLocation" style={
                     { width: "100%" }
                 }>
-                    <Form.Label>Starting Point</Form.Label>
+                    <Form.Label className="text-muted">
+                        {children}
+                    </Form.Label>
                     <Form.Control
                         ref={locationRef}
                         type="text"
                         placeholder="Enter start location"
                         required
                     />
-                    <Form.Text className="text-muted">
-                        {children}
-                    </Form.Text>
                 </Form.Group>
                 <Stack direction="horizontal">
                     <Button variant="primary" type="submit" className="m-3">
@@ -88,7 +89,11 @@ function LocationForm( { type, children}: locationFormProps) {
                 </Stack>
             </Stack>
             {
-                location ? <p className="m-0">Start from: {location}</p> : ""
+                location && <div className="m-0">
+                    
+                    {type === "start" ?  <p>Start at:{startLoc}</p> : <p>End at: {endLoc}</p>}
+                    
+                    </div>
             }
         </Form>
     )
