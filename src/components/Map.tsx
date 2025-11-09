@@ -101,7 +101,7 @@ export default function Map() {
                 />
                 <FitMap route = {route} />
 
-                <CenterMap lat={startLat} long={startLong} />
+                <CenterMap lat={startLat ? startLat : endLat} long={startLong ? startLong : endLong} />
                
                 {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
