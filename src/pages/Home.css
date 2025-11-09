@@ -3,3 +3,11 @@ div.carousel-container {
     border-radius: 33px;
     overflow: hidden;
 }
+
+a.home-link-to-vans {
+    text-decoration: none;
+    color: #161616;
+    border: 1px solid green;
+    padding: 1em 2em;
+    border-radius: 16px;
+}
