@@ -52,10 +52,10 @@ export default function Home() {
     return (
         <Stack className="align-items-center">
 
-            <h1>Ready for a ride?</h1>
+           {/*  <h1>Ready for a ride?</h1>
             <h2>Choose your van</h2>
-            <h2>Choose your route</h2>
-            <Link to="/vans" className="home-link-to-vans mb-2">Ride on</Link>
+            <h2>Choose your route</h2> */}
+            <Link to="/vans" className="home-link-to-vans mb-2">Click and choose your Van</Link>
             
 
             <Carousel fade className="carousel-container" >
