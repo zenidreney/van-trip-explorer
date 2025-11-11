@@ -16,7 +16,6 @@ Welcome to **Van Trip Explorer** – a modern front-end portfolio project that s
 - **Bootstrap**: Styling framework for rapid, mobile-first UI development.
 - **clsx**: Utility library for efficiently combining class names.
 - **Leaflet**: Powerful open-source library for mobile-friendly interactive maps.
-- **Leaflet Routing Machine**: Routing and directions on Leaflet maps.
 - **React Leaflet**: React components for integrating Leaflet maps with React.
 - **Firebase**: Backend-as-a-service for authentication, data storage, and more.
 
