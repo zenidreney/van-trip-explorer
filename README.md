@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# Van Trip Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Van Trip Explorer** – a modern front-end portfolio project that showcases a rich web app for planning and exploring van trips. This project demonstrates a wide variety of contemporary web technologies, tools, and libraries. Below you'll find an overview of the stack and key features implemented.
 
-Currently, two official plugins are available:
+## 🚦 Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Languages & Build Tools
+- **TypeScript**: Structured, statically-typed JavaScript for scalable code.
+- **Vite**: Ultra-fast front-end build tooling, hot-reload, and optimized bundling.
 
-## React Compiler
+### Framework & Libraries
+- **React**: Modern, component-based UI library for building interactive SPAs.
+- **React DOM**: Virtual DOM and rendering support.
+- **React Router**: Declarative routing and navigation for React apps.
+- **React Bootstrap**: Bootstrap components brought to React for sleek and responsive UI.
+- **Bootstrap**: Styling framework for rapid, mobile-first UI development.
+- **clsx**: Utility library for efficiently combining class names.
+- **Leaflet**: Powerful open-source library for mobile-friendly interactive maps.
+- **Leaflet Routing Machine**: Routing and directions on Leaflet maps.
+- **React Leaflet**: React components for integrating Leaflet maps with React.
+- **Firebase**: Backend-as-a-service for authentication, data storage, and more.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Development & Quality Tools
+- **ESLint**: Code quality and linting for clean, maintainable code.
+- **TypeScript ESLint**: Typed linting tailored for TypeScript.
+- **@eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh**: Extended lint rules for hooks and efficient development.
+- **Globals**: Definitions for global variables in environments.
+- **@vitejs/plugin-react**: Optimized React integration for Vite.
+- **@types/...**: Type declarations for better Intellisense and type-checking.
 
-## Expanding the ESLint configuration
+## 🗺️ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Interactive map-based trip planning via Leaflet & React Leaflet.
+- Route calculation and optimization with Leaflet Routing Machine.
+- Responsive design powered by Bootstrap & React Bootstrap.
+- Data management and authentication using Firebase.
+- Modern navigation via React Router.
+- Type-safe codebase for fewer bugs and scalable development.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 💻 Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/` – All source code and React components.
+- `public/` – Static assets.
+- `index.html` – HTML entry point.
+- Config files for TypeScript, ESLint, and Vite.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Getting Started
+
+Install dependencies:
+```bash
+npm install
+```
+Run the app in development mode:
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Build for production:
+```bash
+npm run build
 ```
+
+Lint for code quality:
+```bash
+npm run lint
+```
+
+## 🌟 Portfolio Highlights
+
+This project showcases:
+- Interactive map
+- Modern React and hooks patterns
+- Responsive UI using Bootstrap
+- Integration with third-party APIs and backends (Firebase)
+- TypeScript best practices
+
+---
+
+Feel free to explore the code, customize, and build upon this foundation for your own front-end adventures!
