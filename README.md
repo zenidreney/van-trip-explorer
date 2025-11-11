@@ -2,6 +2,15 @@
 
 Welcome to **Van Trip Explorer** – a modern front-end portfolio project that showcases a rich web app for planning and exploring van trips. This project demonstrates a wide variety of contemporary web technologies, tools, and libraries. Below you'll find an overview of the stack and key features implemented.
 
+## 🗺️ Features
+
+- Interactive map-based trip planning via Leaflet & React Leaflet.
+- Route calculation with Nominatim API.
+- Responsive design powered by Bootstrap & React Bootstrap.
+- Data management using Firebase.
+- Modern navigation via React Router.
+- Type-safe codebase for fewer bugs and scalable development.
+
 ## 🚦 Technologies Used
 
 ### Languages & Build Tools
@@ -26,15 +35,6 @@ Welcome to **Van Trip Explorer** – a modern front-end portfolio project that s
 - **Globals**: Definitions for global variables in environments.
 - **@vitejs/plugin-react**: Optimized React integration for Vite.
 - **@types/...**: Type declarations for better Intellisense and type-checking.
-
-## 🗺️ Features
-
-- Interactive map-based trip planning via Leaflet & React Leaflet.
-- Route calculation and optimization with Leaflet Routing Machine.
-- Responsive design powered by Bootstrap & React Bootstrap.
-- Data management and authentication using Firebase.
-- Modern navigation via React Router.
-- Type-safe codebase for fewer bugs and scalable development.
 
 ## 💻 Project Structure
 
