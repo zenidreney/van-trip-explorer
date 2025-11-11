@@ -5,12 +5,6 @@
 
 body {
     background-color: rgb(236, 235, 144);
+   
 }
 
-
-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}

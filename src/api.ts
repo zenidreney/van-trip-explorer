@@ -42,7 +42,7 @@ export async function getAllVans(): Promise<Van[]> {
         }
     })
 
-    console.log(snapshotData)
+    //console.log(snapshotData)
 
     return snapshotData
 

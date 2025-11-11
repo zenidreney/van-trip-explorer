@@ -1,7 +1,11 @@
 import { useVans } from "../hooks/useVans"
 import { Link } from "react-router"
 
-import "./Vans.css"
+import Stack from 'react-bootstrap/Stack';
+
+import Image from 'react-bootstrap/Image';
+
+//import "./Vans.css"
 
 export default function Vans() {
 
@@ -20,15 +24,17 @@ export default function Vans() {
     const vanEls = vans.map(van => {
 
         return (
-            <Link key={van.id} to={`/vans/${van.id}`}>
+            <Link key={van.id} to={`/vans/${van.id}`} className="text-reset text-decoration-none">
 
-                <div key={van.id} className='van-info-container'>
+                <Stack className="justify-content-center align-items-center">
 
-                    <img className="van-img" src={van.imageUrl} />
-                    <p>{van.name} </p>
-                    <p>{van.price.toString()} </p>
+                    <Image className="van-img rounded" src={van.imageUrl} />
+                    <Stack direction="horizontal" className="justify-content-between mt-3">
+                        <p>{van.name} </p>
+                        <p>{van.price.toString()}$ / day </p>
+                    </Stack>
 
-                </div>
+                </Stack>
 
             </Link>
         )
@@ -36,9 +42,13 @@ export default function Vans() {
     })
 
     return (
-        <div className='vans-container'>
+        <Stack
+            direction="horizontal"
+            gap={5}
+            className="flex-wrap justify-content-center"
+        >
             {vanEls}
-        </div>
+        </Stack>
 
     )
 }
