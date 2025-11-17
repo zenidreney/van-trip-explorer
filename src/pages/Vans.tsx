@@ -68,22 +68,25 @@ export default function Vans() {
     return (
         <Stack>
             <Stack direction="horizontal" gap={3} className="mb-3 justify-content-center">
-                <Button 
+                <Button
                     variant="info"
                     className="text-white"
-                    onClick={() => setSearchParams({type: "simple"})}>Simple</Button>
-                <Button 
+                    onClick={() => setSearchParams({ type: "simple" })}>Simple</Button>
+                <Button
                     variant="warning"
                     className="text-white"
-                    onClick={() => setSearchParams({type: "rugged"})}>Rugged</Button>
-                <Button 
+                    onClick={() => setSearchParams({ type: "rugged" })}>Rugged</Button>
+                <Button
                     variant="dark"
                     className="text-white"
-                    onClick={() => setSearchParams({type: "luxury"})}>Luxury</Button>
-                <Button 
-                    variant="success"
-                    className="text-white"
-                    onClick={() => setSearchParams({})}>All</Button>
+                    onClick={() => setSearchParams({ type: "luxury" })}>Luxury</Button>
+                {
+                    typeFilter &&
+                    <Button
+                        variant="success"
+                        className="text-white"
+                        onClick={() => setSearchParams({})}>All</Button>
+                }
             </Stack>
             <Stack
                 direction="horizontal"
