@@ -1,13 +1,24 @@
 import { useVans } from "../hooks/useVans"
-import { Link } from "react-router"
+import { Link, useSearchParams } from "react-router"
+
+import clsx from 'clsx';
+
 
 import Stack from 'react-bootstrap/Stack';
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 
 import Image from 'react-bootstrap/Image';
 
 //import "./Vans.css"
 
 export default function Vans() {
+
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const typeFilter = searchParams.get("type")
+
+    console.log(typeFilter)
 
     const { vans, loading, error } = useVans()
 
@@ -21,7 +32,13 @@ export default function Vans() {
         return <p>Error</p>
     }
 
-    const vanEls = vans.map(van => {
+    const filteredVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans
+
+    const vanEls = filteredVans.map(van => {
+        const badgeColor =
+            van.type === "simple" ? clsx("info") :
+                van.type === "luxury" ? clsx("dark") :
+                    van.type === "rugged" ? clsx("warning") : ""
 
         return (
             <Link key={van.id} to={`/vans/${van.id}`} className="text-reset text-decoration-none">
@@ -34,6 +51,13 @@ export default function Vans() {
                         <p>{van.price.toString()}$ / day </p>
                     </Stack>
 
+                    <Stack>
+                        <h5>{van.name} </h5>
+                        <Badge bg={badgeColor} className="align-self-start">
+                            {van.type}
+                        </Badge>
+                    </Stack>
+
                 </Stack>
 
             </Link>
@@ -42,12 +66,32 @@ export default function Vans() {
     })
 
     return (
-        <Stack
-            direction="horizontal"
-            gap={5}
-            className="flex-wrap justify-content-center"
-        >
-            {vanEls}
+        <Stack>
+            <Stack direction="horizontal" gap={3} className="mb-3 justify-content-center">
+                <Button 
+                    variant="info"
+                    className="text-white"
+                    onClick={() => setSearchParams({type: "simple"})}>Simple</Button>
+                <Button 
+                    variant="warning"
+                    className="text-white"
+                    onClick={() => setSearchParams({type: "rugged"})}>Rugged</Button>
+                <Button 
+                    variant="dark"
+                    className="text-white"
+                    onClick={() => setSearchParams({type: "luxury"})}>Luxury</Button>
+                <Button 
+                    variant="success"
+                    className="text-white"
+                    onClick={() => setSearchParams({})}>All</Button>
+            </Stack>
+            <Stack
+                direction="horizontal"
+                gap={5}
+                className="flex-wrap justify-content-center"
+            >
+                {vanEls}
+            </Stack>
         </Stack>
 
     )
