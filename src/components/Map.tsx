@@ -4,7 +4,7 @@ import { useEffect } from "react";
 //import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 import { MapContainer, TileLayer, useMap, Polyline } from 'react-leaflet'
-import { useLocation } from "../hooks/useLocation";
+import { useMapLocation } from "../hooks/useMapLocation";
 
 
 type CenterMapProps = {
@@ -42,7 +42,7 @@ function FitMap( { route }: { route: [number, number][]} ) {
 
 export default function Map() {
     
-    const { startLocation, endLocation, setRoute, setDistance, route, distance } = useLocation()
+    const { startLocation, endLocation, setRoute, setDistance, route, distance } = useMapLocation()
     //const [route, setRoute] = useState<[number, number][]>([])
 
     const { lat: startLat, long: startLong } = startLocation

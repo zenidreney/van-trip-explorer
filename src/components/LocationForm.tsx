@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 
 import { getCoordinates } from '../utils/getCoordinates';
-import { useLocation } from '../hooks/useLocation';
+import { useMapLocation } from '../hooks/useMapLocation';
 
 type locationFormProps = {
     type: "start" | "end",
@@ -22,7 +22,7 @@ function LocationForm({ type, children }: locationFormProps) {
         setStartLocation,
         endLocation,
         setEndLocation
-    } = useLocation()
+    } = useMapLocation()
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()

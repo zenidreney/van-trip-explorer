@@ -18,7 +18,7 @@ export default function Vans() {
 
     const typeFilter = searchParams.get("type")
 
-    console.log(typeFilter)
+    console.log(typeFilter, searchParams.toString())
 
     const { vans, loading, error } = useVans()
 
@@ -41,7 +41,7 @@ export default function Vans() {
                     van.type === "rugged" ? clsx("warning") : ""
 
         return (
-            <Link key={van.id} to={`/vans/${van.id}`} className="text-reset text-decoration-none">
+            <Link key={van.id} to={`/vans/${van.id}`} state={{ search: searchParams.toString() }} className="text-reset text-decoration-none">
 
                 <Stack className="justify-content-center align-items-center">
 

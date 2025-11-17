@@ -1,6 +1,6 @@
-import { useParams } from "react-router"
+import { Link, useLocation, useParams } from "react-router"
 import { useVan } from "../hooks/useVan"
-import { useLocation } from "../hooks/useLocation";
+import { useMapLocation } from "../hooks/useMapLocation";
 
 import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
@@ -15,16 +15,21 @@ export default function VanDetail() {
     //console.log(typeof vanId, vanId)
     const { van, loading, error } = useVan(vanId)
     // console.log("loading: ", loading, "error: ", error)
-    const { distance } = useLocation()
+    const { distance } = useMapLocation()
 
+    const pageLocation = useLocation()
+    const searchQuery = pageLocation.state?.search || ""
+    
     if (loading) { return <p>Loading</p> }
     if (error) { return <p>Error</p> }
     if (!van) { return <p>No such Van.</p> }
-
+    
+    
     const { description, imageUrl, price } = van
 
     return (
         <Stack direction="vertical" className="van-detail-container">
+            <Link to={`..?${searchQuery}`} relative="path">Back to all vans</Link>
 
             <Stack
                 direction="horizontal"
