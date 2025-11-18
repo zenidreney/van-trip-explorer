@@ -1,4 +1,4 @@
-import { createContext, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
+import { createContext, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 
 type LocationObject = {
     location: string | null
@@ -17,6 +17,7 @@ type LocationContextType = {
     setRoute: Dispatch<SetStateAction<[number, number][]>>
     distance: number | null
     setDistance: Dispatch<SetStateAction<number | null>>
+    mapRef: React.RefObject<HTMLDivElement | null>
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined)
@@ -38,6 +39,8 @@ function LocationContextProvider({ children }: LocationContextProps) {
 
     const [distance, setDistance] = useState<number | null>(null)
 
+    const mapRef = useRef<HTMLDivElement>(null)
+
     return (
         <LocationContext.Provider value={{
             startLocation,
@@ -47,7 +50,8 @@ function LocationContextProvider({ children }: LocationContextProps) {
             route,
             setRoute,
             distance,
-            setDistance
+            setDistance,
+            mapRef
         }}>
             {children}
         </LocationContext.Provider>

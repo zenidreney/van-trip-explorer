@@ -21,8 +21,13 @@ function LocationForm({ type, children }: locationFormProps) {
         startLocation,
         setStartLocation,
         endLocation,
-        setEndLocation
+        setEndLocation,
+        mapRef
     } = useMapLocation()
+
+    useEffect(() => {
+        mapRef.current?.scrollIntoView()
+    }, [mapRef, startLocation, endLocation])
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -45,6 +50,7 @@ function LocationForm({ type, children }: locationFormProps) {
                 lat: latitude,
                 long: longitude
             })
+
         }
     }
 
@@ -88,7 +94,7 @@ function LocationForm({ type, children }: locationFormProps) {
                 </Button>
 
             </Stack>
-            
+
             {type === "start" && startLoc && <p>Start at: {startLoc}</p>}
 
             {type === "end" && endLoc && <p>End at: {endLoc}</p>}

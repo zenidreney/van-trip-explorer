@@ -17,8 +17,8 @@ function CenterMap({ lat, long }: CenterMapProps) {
     const map = useMap()
 
     useEffect(() => {
-        if(lat && long) {
-            const center : [number, number] = [parseFloat(lat), parseFloat(long)]
+        if (lat && long) {
+            const center: [number, number] = [parseFloat(lat), parseFloat(long)]
             map.setView(center, map.getZoom())
         }
     }, [lat, long, map])
@@ -26,12 +26,12 @@ function CenterMap({ lat, long }: CenterMapProps) {
     return null
 }
 
-function FitMap( { route }: { route: [number, number][]} ) {
+function FitMap({ route }: { route: [number, number][] }) {
     const map = useMap()
 
     useEffect(() => {
-        if(route.length > 1) {
-            
+        if (route.length > 1) {
+
             map.fitBounds(route)
         }
     }, [route, map])
@@ -41,18 +41,21 @@ function FitMap( { route }: { route: [number, number][]} ) {
 
 
 export default function Map() {
-    
-    const { startLocation, endLocation, setRoute, setDistance, route, distance } = useMapLocation()
+
+    const { startLocation, endLocation, setRoute, setDistance, route } = useMapLocation()
     //const [route, setRoute] = useState<[number, number][]>([])
 
     const { lat: startLat, long: startLong } = startLocation
     const { lat: endLat, long: endLong } = endLocation
-    
+
     //console.log(startLat, startLong, endLat, endLong)
-    
+
+
+
+
     useEffect(() => {
-    
-        if(!startLat || !endLat) {
+
+        if (!startLat || !endLat) {
 
             return
 
@@ -61,11 +64,11 @@ export default function Map() {
         async function fetchRoute() {
             const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`)
             const data = await res.json()
-           // console.log("Route Data:", data.routes[0].legs[0].distance)
+            // console.log("Route Data:", data.routes[0].legs[0].distance)
             const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000)
             setDistance(distanceInKm)
 
-            if(data.routes?.length) {
+            if (data.routes?.length) {
                 const coords = data.routes[0].geometry.coordinates.map(
                     ([lng, lat]: [number, number]) => [lat, lng]
                 )
@@ -74,10 +77,10 @@ export default function Map() {
         }
 
         fetchRoute()
-    
-    
+
+
     }, [startLat, startLong, setRoute, setDistance, endLat, endLong])
-    
+
     const mapStyle = {
         height: "400px",
         width: "100%",
@@ -85,9 +88,9 @@ export default function Map() {
 
     // JUST FOR DEV CONSOLE
 
-    useEffect(() => {
+/*     useEffect(() => {
         console.log("Distance", distance)
-    }, [distance])
+    }, [distance]) */
 
     // END OF CONSOLE
 
@@ -99,10 +102,10 @@ export default function Map() {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <FitMap route = {route} />
+                <FitMap route={route} />
 
                 <CenterMap lat={startLat ? startLat : endLat} long={startLong ? startLong : endLong} />
-               
+
                 {route.length > 0 && <Polyline positions={route} color="purple" />}
             </MapContainer>
         </>
