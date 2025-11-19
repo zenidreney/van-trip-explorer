@@ -25,9 +25,13 @@ function LocationForm({ type, children }: locationFormProps) {
         mapRef
     } = useMapLocation()
 
+    /* TO SCROLL INTO VIEW */
+
     useEffect(() => {
         mapRef.current?.scrollIntoView()
     }, [mapRef, startLocation, endLocation])
+
+    /* Rest */
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()

@@ -50,7 +50,7 @@ export default function Home() {
 
 
     return (
-        <Stack className="align-items-center">
+        <Stack gap={5} className="align-items-center">
 
            {/*  <h1>Ready for a ride?</h1>
             <h2>Choose your van</h2>

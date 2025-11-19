@@ -8,7 +8,7 @@ import { Stack } from "react-bootstrap"
 
 export default function Layout() {
     return (
-        <Stack gap={4} className="body-container mt-3">
+        <Stack gap={4} className="body-container mt-5">
             
             <Header />
 

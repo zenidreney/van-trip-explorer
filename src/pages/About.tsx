@@ -24,8 +24,8 @@ export default function About() {
 
 
                 </Stack>
-                <Stack className="align-items-center">
-                    <h2>Your destination is waiting. Your van is ready.</h2>
+                <Stack className="align-items-center text-center">
+                    <h2>Your destination is waiting. Your van is ready. Your destination is waiting. Your van is ready.</h2>
                     <Link to="/vans" className="link-to-vans mb-2">Click and choose your Van</Link>
                 </Stack>
 
