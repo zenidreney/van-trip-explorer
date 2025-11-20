@@ -21,6 +21,7 @@ export default function VanDetail() {
 
     const pageLocation = useLocation()
     const searchQuery = pageLocation.state?.search || ""
+    const searchedType = searchQuery?.slice(5)
     
     if (loading) { return <p>Loading</p> }
     if (error) { return <p>Error</p> }
@@ -32,7 +33,7 @@ export default function VanDetail() {
 
     return (
         <Stack direction="vertical" className="van-detail-container">
-            <Link to={`..?${searchQuery}`} relative="path">Back to all vans</Link>
+            <Link to={`..?${searchQuery}`} relative="path">Back to {searchQuery ? searchedType : "all"} vans</Link>
 
             <Stack
                 direction="horizontal"
