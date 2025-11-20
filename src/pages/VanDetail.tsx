@@ -21,19 +21,27 @@ export default function VanDetail() {
 
     const pageLocation = useLocation()
     const searchQuery = pageLocation.state?.search || ""
-    const searchedType = searchQuery?.slice(5)
-    
+
+    const searchParams = new URLSearchParams(searchQuery)
+
+
     if (loading) { return <p>Loading</p> }
     if (error) { return <p>Error</p> }
     if (!van) { return <p>No such Van.</p> }
-    
-    
+
+
     const { description, imageUrl, price } = van
 
 
     return (
         <Stack direction="vertical" className="van-detail-container">
-            <Link to={`..?${searchQuery}`} relative="path">Back to {searchQuery ? searchedType : "all"} vans</Link>
+            <Link to={`..?${searchQuery}`} relative="path">Back to {
+
+                searchQuery ?
+                    searchParams.get("type") :
+                    "all"
+
+            } vans</Link>
 
             <Stack
                 direction="horizontal"
@@ -52,7 +60,7 @@ export default function VanDetail() {
                     <LocationForm type="end">I want to end my journey at...</LocationForm>
 
 
-                {distance && <p>Total distance: {distance} kms</p>}
+                    {distance && <p>Total distance: {distance} kms</p>}
                 </Stack>
                 <Image src={imageUrl} rounded fluid className="van-img" />
 
