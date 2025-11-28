@@ -25,13 +25,11 @@ function LocationForm({ type, children }: locationFormProps) {
         mapRef
     } = useMapLocation()
 
-    /* TO SCROLL INTO VIEW */
 
     useEffect(() => {
         mapRef.current?.scrollIntoView()
     }, [mapRef, startLocation, endLocation])
 
-    /* Rest */
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -58,23 +56,13 @@ function LocationForm({ type, children }: locationFormProps) {
         }
     }
 
-    // JUST FOR DEVELOPMENT CONSOLE
-
-    useEffect(() => {
-        const { location: startLocConsole, lat: startLatConsole, long: startLongConsole } = startLocation
-        const { location: endLocConsole, lat: endLatConsole, long: endLongConsole } = endLocation
-
-        console.log("Start City:", startLocConsole, "latitude", startLatConsole, "longitude", startLongConsole);
-        console.log("End City:", endLocConsole, "latitude", endLatConsole, "longitude", endLongConsole)
-    }, [startLocation, endLocation]);
 
     const { location: startLoc, lat: startLat, long: startLong } = startLocation
     const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
-    console.log("Start 2nd console", startLoc, startLat, startLong)
-    console.log("End 2nd console", endLoc, endLat, endLong)
+    console.log("Start coordinates", startLoc, startLat, startLong)
+    console.log("End coordinates", endLoc, endLat, endLong)
 
-    // END OF CONSOLE
 
     return (
         <Form onSubmit={handleSubmit}>
