@@ -37,23 +37,15 @@ function LocationForm({ type, children }: locationFormProps) {
         const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : "madrid"
         const { name, latitude, longitude } = await getCoordinates(locationName)
 
-        if (type === "start") {
+        const setLocation = (type === "start") ? setStartLocation : setEndLocation
+        console.log(setLocation)
 
-            setStartLocation({
-                location: name,
-                lat: latitude,
-                long: longitude
-            })
+        setLocation({
+            location: name,
+            lat: latitude,
+            long: longitude
+        })
 
-        } else if (type === "end") {
-
-            setEndLocation({
-                location: name,
-                lat: latitude,
-                long: longitude
-            })
-
-        }
     }
 
 
