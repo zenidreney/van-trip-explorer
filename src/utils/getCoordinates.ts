@@ -19,11 +19,7 @@ export async function getCoordinates(location: string) {
         }
 
 
-        return {
-            name: data[0].name,
-            latitude: data[0].lat,
-            longitude: data[0].lon
-        }
+        return data
     } catch (error) {
         console.log(error)
         throw error

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,9 +12,31 @@ type locationFormProps = {
     children?: React.ReactNode
 }
 
+type GetCoordinatesResult = {
+    place_id: number;
+    licence: string;
+    osm_type: string;
+    osm_id: number;
+    lat: string;
+    lon: string;
+    display_name: string;
+    class: string;
+    type: string;
+    place_rank: number;
+    importance: number;
+    name: string;
+    addresstype: string;
+    boundingbox: string[];
+};
+
 
 function LocationForm({ type, children }: locationFormProps) {
-    console.log(children)
+
+    const [locationData, setLocationData] = useState<GetCoordinatesResult[] | null>(null)
+    const [isStartSubmitted, setIsStartSubmitted] = useState<boolean>(false)
+    const [isEndSubmitted, setIsEndSubmitted] = useState<boolean>(false)
+
+      const isSubmitted = (type === "start") ? isStartSubmitted : isEndSubmitted
 
     const locationRef = useRef<HTMLInputElement>(null)
     const {
@@ -24,7 +46,10 @@ function LocationForm({ type, children }: locationFormProps) {
         setEndLocation,
         mapRef
     } = useMapLocation()
-
+    const { location: startPoint } = startLocation
+    const { location: endPoint } = endLocation
+    const setLocationType = (type === "start") ? setStartLocation : setEndLocation
+    const setIsSubmitted = (type === "start") ? setIsStartSubmitted : setIsEndSubmitted
 
     useEffect(() => {
         mapRef.current?.scrollIntoView()
@@ -35,31 +60,51 @@ function LocationForm({ type, children }: locationFormProps) {
         e.preventDefault()
 
         const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : "madrid"
-        const { name, latitude, longitude } = await getCoordinates(locationName)
+        const dataFromGetCoordinates = await getCoordinates(locationName)
+
+        console.log(dataFromGetCoordinates)
 
         const setLocation = (type === "start") ? setStartLocation : setEndLocation
-        console.log(setLocation)
 
-        setLocation({
-            location: name,
-            lat: latitude,
-            long: longitude
-        })
+        setLocation(
+            {
+                location: dataFromGetCoordinates[0].display_name,
+                lat: dataFromGetCoordinates[0].lat,
+                long: dataFromGetCoordinates[0].lon
+            })
+        setLocationData(dataFromGetCoordinates)
+        setIsSubmitted(true)
 
     }
 
 
-    const { location: startLoc, lat: startLat, long: startLong } = startLocation
-    const { location: endLoc, lat: endLat, long: endLong } = endLocation
 
-    console.log("Start coordinates", startLoc, startLat, startLong)
-    console.log("End coordinates", endLoc, endLat, endLong)
+
+    const searchLocationOptions = locationData?.map(loc => {
+        console.log(loc.osm_id)
+        return <Button
+            key={loc.osm_id}
+            variant="warning"
+            onClick={() => {
+                setLocationType(
+                    {
+                        location: loc.display_name,
+                        lat: loc.lat,
+                        long: loc.lon
+                    })
+                setIsSubmitted(false)
+
+            }}
+        >
+            {loc.display_name}
+        </Button>
+    })
 
 
     return (
         <Form onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3} className='align-items-end'>
-                <Form.Group controlId="formStartLocation" style={
+                <Form.Group controlId={`form-${type}-location`} style={
                     { width: "100%" }
                 }>
                     <Form.Label className="text-muted">
@@ -79,9 +124,15 @@ function LocationForm({ type, children }: locationFormProps) {
 
             </Stack>
 
-            {type === "start" && startLoc && <p>Start at: {startLoc}</p>}
+            {type === "start" && startPoint && <p>Start from: {startPoint}</p>}
 
-            {type === "end" && endLoc && <p>End at: {endLoc}</p>}
+            {type === "end" && endPoint && <p>End at: {endPoint}</p>}
+
+            <Stack gap={3}>
+                {isSubmitted &&
+                    searchLocationOptions
+                }
+            </Stack>
 
         </Form>
     )
