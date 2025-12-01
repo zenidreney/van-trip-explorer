@@ -48,7 +48,7 @@ function LocationForm({ type, children }: locationFormProps) {
     } = useMapLocation()
     const { location: startPoint } = startLocation
     const { location: endPoint } = endLocation
-    const setLocationType = (type === "start") ? setStartLocation : setEndLocation
+    const setLocationByType = (type === "start") ? setStartLocation : setEndLocation
     const setIsSubmitted = (type === "start") ? setIsStartSubmitted : setIsEndSubmitted
 
     useEffect(() => {
@@ -61,10 +61,6 @@ function LocationForm({ type, children }: locationFormProps) {
 
         const locationName = locationRef.current && locationRef.current.value ? locationRef.current.value : "madrid"
         const dataFromGetCoordinates = await getCoordinates(locationName)
-
-        console.log(dataFromGetCoordinates)
-
-        const setLocationByType = (type === "start") ? setStartLocation : setEndLocation
 
         const firstResultLocation = dataFromGetCoordinates[0].display_name
         const firstResultLatitude = dataFromGetCoordinates[0].lat
@@ -82,7 +78,7 @@ function LocationForm({ type, children }: locationFormProps) {
     }
 
    function handleLocationOptionButton(location: GetCoordinatesResult) {
-        setLocationType(
+        setLocationByType(
             {
                 location: location.display_name,
                 lat: location.lat,
@@ -94,7 +90,7 @@ function LocationForm({ type, children }: locationFormProps) {
 
 
     const searchLocationOptions = locationData?.map(loc => {
-        console.log(loc.osm_id)
+        
         return <Button
             key={loc.osm_id}
             variant="warning"
