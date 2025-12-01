@@ -64,19 +64,32 @@ function LocationForm({ type, children }: locationFormProps) {
 
         console.log(dataFromGetCoordinates)
 
-        const setLocation = (type === "start") ? setStartLocation : setEndLocation
+        const setLocationByType = (type === "start") ? setStartLocation : setEndLocation
 
-        setLocation(
+        const firstResultLocation = dataFromGetCoordinates[0].display_name
+        const firstResultLatitude = dataFromGetCoordinates[0].lat
+        const firstResultLongitude = dataFromGetCoordinates[0].lon
+
+        setLocationByType(
             {
-                location: dataFromGetCoordinates[0].display_name,
-                lat: dataFromGetCoordinates[0].lat,
-                long: dataFromGetCoordinates[0].lon
+                location: firstResultLocation,
+                lat: firstResultLatitude,
+                long: firstResultLongitude
             })
         setLocationData(dataFromGetCoordinates)
         setIsSubmitted(true)
 
     }
 
+   function handleLocationOptionButton(location: GetCoordinatesResult) {
+        setLocationType(
+            {
+                location: location.display_name,
+                lat: location.lat,
+                long: location.lon
+            })
+        setIsSubmitted(false)
+    }
 
 
 
@@ -85,16 +98,7 @@ function LocationForm({ type, children }: locationFormProps) {
         return <Button
             key={loc.osm_id}
             variant="warning"
-            onClick={() => {
-                setLocationType(
-                    {
-                        location: loc.display_name,
-                        lat: loc.lat,
-                        long: loc.lon
-                    })
-                setIsSubmitted(false)
-
-            }}
+            onClick={() => handleLocationOptionButton(loc)}
         >
             {loc.display_name}
         </Button>
