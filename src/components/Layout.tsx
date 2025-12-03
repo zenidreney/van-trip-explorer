@@ -1,10 +1,8 @@
-import Header from "./Header"
-
-import { Outlet } from "react-router"
-
 
 import { Stack } from "react-bootstrap"
+import { Outlet } from "react-router"
 //import "../App.css"
+import Header from "./Header"
 
 export default function Layout() {
     return (
