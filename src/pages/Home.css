@@ -1,6 +1,5 @@
 div.carousel-container {
-    max-width: 720px;
-    border-radius: 33px;
-    overflow: hidden;
+	max-width: 720px;
+	border-radius: 33px;
+	overflow: hidden;
 }
-

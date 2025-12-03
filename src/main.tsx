@@ -1,17 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
-/* import { getApiObject, getVan } from './api.ts'
+const root = document.getElementById("root");
 
+if (!root) {
+	throw new Error("No root element!!");
+}
 
-getApiObject()
-getVan(1) */
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+createRoot(root).render(
+	<StrictMode>
+		<App />
+	</StrictMode>,
+);

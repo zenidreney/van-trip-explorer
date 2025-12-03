@@ -1,11 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 
-import { getCoordinates } from "../utils/getCoordinates";
 import { useMapLocation } from "../hooks/useMapLocation";
+import { getCoordinates } from "../utils/getCoordinates";
 
 type locationFormProps = {
 	type: "start" | "end";
@@ -62,10 +62,9 @@ function LocationForm({ type, children }: locationFormProps) {
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		const locationName =
-			locationRef.current?.value
-				? locationRef.current.value
-				: "madrid";
+		const locationName = locationRef.current?.value
+			? locationRef.current.value
+			: "madrid";
 		const dataFromGetCoordinates = await getCoordinates(locationName);
 
 		const firstResultLocation = dataFromGetCoordinates[0].display_name;
