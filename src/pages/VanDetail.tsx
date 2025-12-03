@@ -1,8 +1,8 @@
 import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
 import { Link, useLocation, useParams } from "react-router";
-import LeafletMap from "../components/LeafletMap";
 import LocationForm from "../components/LocationForm";
+import UserMap from "../components/UserMap";
 import { useMapLocation } from "../hooks/useMapLocation";
 import { useVan } from "../hooks/useVan";
 
@@ -58,7 +58,7 @@ export default function VanDetail() {
 			</Stack>
 
 			<Stack className="map-frame mt-3" ref={mapRef}>
-				<LeafletMap />
+				<UserMap />
 			</Stack>
 		</Stack>
 	);

@@ -36,15 +36,12 @@ function FitMap({ route }: { route: [number, number][] }) {
 	return null;
 }
 
-export default function LeafletMap() {
+export default function UserMap() {
 	const { startLocation, endLocation, setRoute, setDistance, route } =
 		useMapLocation();
-	//const [route, setRoute] = useState<[number, number][]>([])
 
 	const { lat: startLat, long: startLong } = startLocation;
 	const { lat: endLat, long: endLong } = endLocation;
-
-	//console.log(startLat, startLong, endLat, endLong)
 
 	useEffect(() => {
 		if (!startLat || !endLat) {
@@ -75,14 +72,6 @@ export default function LeafletMap() {
 		height: "400px",
 		width: "100%",
 	};
-
-	// JUST FOR DEV CONSOLE
-
-	/*     useEffect(() => {
-        console.log("Distance", distance)
-    }, [distance]) */
-
-	// END OF CONSOLE
 
 	return (
 		<MapContainer
