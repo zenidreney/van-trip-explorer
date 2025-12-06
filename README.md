@@ -29,10 +29,7 @@ Welcome to **Van Trip Explorer** – a modern front-end portfolio project that s
 - **Firebase**: Backend-as-a-service for authentication, data storage, and more.
 
 ### Development & Quality Tools
-- **ESLint**: Code quality and linting for clean, maintainable code.
-- **TypeScript ESLint**: Typed linting tailored for TypeScript.
-- **@eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh**: Extended lint rules for hooks and efficient development.
-- **Globals**: Definitions for global variables in environments.
+- **Biome**: High code quality and linting for up to date, clean, maintainable code.
 - **@vitejs/plugin-react**: Optimized React integration for Vite.
 - **@types/...**: Type declarations for better Intellisense and type-checking.
 
