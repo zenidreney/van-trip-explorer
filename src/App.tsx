@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import {
+	createBrowserRouter,
+	createRoutesFromElements,
+	Route,
+	RouterProvider,
+	Routes,
+} from "react-router";
 import "./App.css";
 
 import Layout from "./components/Layout";
@@ -10,19 +16,21 @@ import VanDetail from "./pages/VanDetail";
 import Vans from "./pages/Vans";
 
 function App() {
+	const router = createBrowserRouter(
+		createRoutesFromElements(
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/vans" element={<Vans />} />
+					<Route path="/vans/:vanId" element={<VanDetail />} />
+					<Route path="*" element={<NotFound />} />
+				</Route>
+		),
+	);
+
 	return (
 		<LocationContextProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<Home />} />
-						<Route path="/about" element={<About />} />
-						<Route path="/vans" element={<Vans />} />
-						<Route path="/vans/:vanId" element={<VanDetail />} />
-						<Route path="*" element={<NotFound />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
+			<RouterProvider router={router} />
 		</LocationContextProvider>
 	);
 }
