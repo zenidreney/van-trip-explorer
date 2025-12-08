@@ -3,12 +3,13 @@ import type { Van } from "../api";
 import { getAllVans } from "../api";
 
 export function useVans() {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [vans, setVans] = useState<Van[]>([]);
 	const [error, setError] = useState<Error | null>(null);
 
 	useEffect(() => {
 		async function getVans() {
+			setLoading(true);
 			try {
 				//throw new Error("Test Error") /* To test the error state */
 				const vansData = await getAllVans();
