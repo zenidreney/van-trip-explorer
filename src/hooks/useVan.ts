@@ -3,7 +3,7 @@ import type { Van } from "../api";
 import { getVan } from "../api";
 
 export function useVan(id: string | undefined) {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [van, setVan] = useState<Van | null>(null);
 	const [error, setError] = useState<Error | null>(null);
 
@@ -12,6 +12,7 @@ export function useVan(id: string | undefined) {
 			return
 		}
 			async function getSingleVan(id: string) {
+				setLoading(true)
 				try {
 					// throw new Error("Test Error") /* To test the error state */
 
