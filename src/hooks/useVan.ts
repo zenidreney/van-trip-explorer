@@ -8,7 +8,9 @@ export function useVan(id: string | undefined) {
 	const [error, setError] = useState<Error | null>(null);
 
 	useEffect(() => {
-		if (id) {
+		if(!id) {
+			return
+		}
 			async function getSingleVan(id: string) {
 				try {
 					// throw new Error("Test Error") /* To test the error state */
@@ -24,7 +26,6 @@ export function useVan(id: string | undefined) {
 			}
 
 			getSingleVan(id);
-		}
 	}, [id]);
 
 	return { van, loading, error };
