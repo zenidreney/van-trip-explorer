@@ -1,14 +1,25 @@
 import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLoaderData, useLocation, useParams } from "react-router";
 import LocationForm from "../components/LocationForm";
 import UserMap from "../components/UserMap";
 import { useMapLocation } from "../hooks/useMapLocation";
-import { useVan } from "../hooks/useVan";
+// import { useVan } from "../hooks/useVan";
+import { getVan } from "../api";
+import type { LoaderFunctionArgs } from "react-router";
+
+
+export function loader( { params }: LoaderFunctionArgs ){
+
+	if(!params.vanId) {
+		throw new Error("No VanId")
+	}
+	return getVan(params.vanId)
+}
 
 export default function VanDetail() {
-	const { vanId } = useParams();
-	const { van, loading, error } = useVan(vanId);
+	// const { vanId } = useParams();
+	// const { van, loading, error } = useVan(vanId);
 	const { distance, mapRef } = useMapLocation();
 
 	const pageLocation = useLocation();
@@ -16,15 +27,9 @@ export default function VanDetail() {
 
 	const searchParams = new URLSearchParams(searchQuery);
 
-	if (loading) {
-		return <p>Loading</p>;
-	}
-	if (error) {
-		return <p>Error</p>;
-	}
-	if (!van) {
-		return <p>No such Van.</p>;
-	}
+	const van = useLoaderData()
+	console.log(van)
+
 
 	const { description, imageUrl, price } = van;
 
