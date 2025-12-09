@@ -20,6 +20,7 @@ function App() {
 			<Route
 				path="/"
 				element={<Layout />}
+				hydrateFallbackElement={<p>Page is Loading!!!</p>}
 				errorElement={
 					<p>Some error occcured, and yes this screen will be updated</p>
 				}

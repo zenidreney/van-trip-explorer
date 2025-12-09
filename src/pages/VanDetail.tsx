@@ -8,28 +8,22 @@ import { useMapLocation } from "../hooks/useMapLocation";
 import { getVan } from "../api";
 import type { LoaderFunctionArgs } from "react-router";
 
-
-export function loader( { params }: LoaderFunctionArgs ){
-
-	if(!params.vanId) {
-		throw new Error("No VanId")
+export function loader({ params }: LoaderFunctionArgs) {
+	if (!params.vanId) {
+		throw new Error("No VanId");
 	}
-	return getVan(params.vanId)
+	return getVan(params.vanId);
 }
 
 export default function VanDetail() {
-	// const { vanId } = useParams();
-	// const { van, loading, error } = useVan(vanId);
 	const { distance, mapRef } = useMapLocation();
 
 	const pageLocation = useLocation();
 	const searchQuery = pageLocation.state?.search || "";
-
 	const searchParams = new URLSearchParams(searchQuery);
 
-	const van = useLoaderData()
-	console.log(van)
-
+	const van = useLoaderData();
+	// console.log(van)
 
 	const { description, imageUrl, price } = van;
 
