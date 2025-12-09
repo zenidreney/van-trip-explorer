@@ -4,9 +4,16 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
 import { Link, useSearchParams } from "react-router";
-import { useVans } from "../hooks/useVans";
+// import { useVans } from "../hooks/useVans";
+// import { getAllVans } from "../api";
+
+import { useLoaderData } from "react-router";
+import { getAllVans, type Van } from "../api";
 
 //import "./Vans.css"
+export function loader() {
+	return getAllVans()
+}
 
 export default function Vans() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -15,18 +22,22 @@ export default function Vans() {
 
 	console.log(typeFilter, searchParams.toString());
 
-	const { vans, loading, error } = useVans();
+	// const { vans, loading, error } = useVans();
 
-	if (loading) {
+	const vans = useLoaderData()
+	console.log(vans)
+
+
+	/* if (loading) {
 		return <p>Loading</p>;
 	}
 
 	if (error) {
 		return <p>Error</p>;
-	}
+	} */
 
-	const filteredVans = typeFilter
-		? vans.filter((van) => van.type === typeFilter)
+	const filteredVans: Van[] = typeFilter
+		? vans.filter((van: Van) => van.type === typeFilter)
 		: vans;
 
 	const vanEls = filteredVans.map((van) => {
