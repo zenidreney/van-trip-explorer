@@ -50,20 +50,25 @@ export default function UserMap() {
 		}
 
 		async function fetchRoute() {
-			setIsRouteLoading(true);
-			const res = await fetch(
-				`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
-			);
-			const data = await res.json();
-			// console.log("Route Data:", data.routes[0].legs[0].distance)
-			const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
-			setDistance(distanceInKm);
-
-			if (data.routes?.length) {
-				const coords = data.routes[0].geometry.coordinates.map(
-					([lng, lat]: [number, number]) => [lat, lng],
+			try {
+				setIsRouteLoading(true);
+				const res = await fetch(
+					`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 				);
-				setRoute(coords);
+				const data = await res.json();
+				// console.log("Route Data:", data.routes[0].legs[0].distance)
+				const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
+				setDistance(distanceInKm);
+
+				if (data.routes?.length) {
+					const coords = data.routes[0].geometry.coordinates.map(
+						([lng, lat]: [number, number]) => [lat, lng],
+					);
+					setRoute(coords);
+				}
+			} catch (error) {
+				throw new Error(`Cannot fetch route because of ${error}`);
+			} finally {
 				setIsRouteLoading(false);
 			}
 		}
@@ -78,7 +83,7 @@ export default function UserMap() {
 
 	return (
 		<>
-		{isRouteLoading ? <p>Route Loading...</p> : ""}
+			{isRouteLoading ? <p>Route Loading...</p> : ""}
 			<MapContainer
 				center={[51.505, -0.09]}
 				zoom={13}
