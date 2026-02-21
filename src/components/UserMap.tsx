@@ -1,5 +1,5 @@
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 //import "leaflet-routing-machine";
 //import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
@@ -42,6 +42,7 @@ export default function UserMap() {
 
 	const { lat: startLat, long: startLong } = startLocation;
 	const { lat: endLat, long: endLong } = endLocation;
+	const [isRouteLoading, setIsRouteLoading] = useState(false);
 
 	useEffect(() => {
 		if (!startLat || !endLat) {
@@ -49,19 +50,26 @@ export default function UserMap() {
 		}
 
 		async function fetchRoute() {
-			const res = await fetch(
-				`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
-			);
-			const data = await res.json();
-			// console.log("Route Data:", data.routes[0].legs[0].distance)
-			const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
-			setDistance(distanceInKm);
-
-			if (data.routes?.length) {
-				const coords = data.routes[0].geometry.coordinates.map(
-					([lng, lat]: [number, number]) => [lat, lng],
+			try {
+				setIsRouteLoading(true);
+				const res = await fetch(
+					`https://router.project-osrm.org/route/v1/driving/${startLong},${startLat};${endLong},${endLat}?overview=full&geometries=geojson`,
 				);
-				setRoute(coords);
+				const data = await res.json();
+				// console.log("Route Data:", data.routes[0].legs[0].distance)
+				const distanceInKm = Math.floor(data.routes[0].legs[0].distance / 1000);
+				setDistance(distanceInKm);
+
+				if (data.routes?.length) {
+					const coords = data.routes[0].geometry.coordinates.map(
+						([lng, lat]: [number, number]) => [lat, lng],
+					);
+					setRoute(coords);
+				}
+			} catch (error) {
+				throw new Error(`Cannot fetch route because of ${error}`);
+			} finally {
+				setIsRouteLoading(false);
 			}
 		}
 
@@ -74,24 +82,27 @@ export default function UserMap() {
 	};
 
 	return (
-		<MapContainer
-			center={[51.505, -0.09]}
-			zoom={13}
-			scrollWheelZoom={false}
-			style={mapStyle}
-		>
-			<TileLayer
-				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-			/>
-			<FitMap route={route} />
+		<>
+			{isRouteLoading ? <p>Route Loading...</p> : ""}
+			<MapContainer
+				center={[51.505, -0.09]}
+				zoom={13}
+				scrollWheelZoom={false}
+				style={mapStyle}
+			>
+				<TileLayer
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				/>
+				<FitMap route={route} />
 
-			<CenterMap
-				lat={startLat ? startLat : endLat}
-				long={startLong ? startLong : endLong}
-			/>
+				<CenterMap
+					lat={startLat ? startLat : endLat}
+					long={startLong ? startLong : endLong}
+				/>
 
-			{route.length > 0 && <Polyline positions={route} color="purple" />}
-		</MapContainer>
+				{route.length > 0 && <Polyline positions={route} color="purple" />}
+			</MapContainer>
+		</>
 	);
 }
