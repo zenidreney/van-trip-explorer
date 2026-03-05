@@ -2,6 +2,9 @@
 
 Welcome to **Van Trip Explorer** – a modern front-end portfolio project that showcases a rich web app for planning and exploring van trips. This project demonstrates a wide variety of contemporary web technologies, tools, and libraries. Below you'll find an overview of the stack and key features implemented.
 
+## About the Project
+This project began as an evolution of my Scrimba React Router course project — I reused the original dataset of vans already uploaded to Firebase and wrote the app from scratch with a different UI/UX. I integrated Leaflet for map interactivity and adding route-finding functionality powered by the Nominatim API. The result is a richer, more dynamic trip planning experience that highlights both creative extension and technical curiosity.
+
 ## 🗺️ Features
 
 - Interactive map-based trip planning via Leaflet & React Leaflet.
@@ -73,3 +76,6 @@ This project showcases:
 ---
 
 Feel free to explore the code, customize, and build upon this foundation for your own front-end adventures!
+
+## License
+Licensed under the MIT License – free to use, modify, and distribute.
